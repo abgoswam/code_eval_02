@@ -17,8 +17,27 @@ python ./scripts_python_01/model_generated_code.py
 
 #### Step 2: Execute code and get pass@1 metrics.
 
+- This needs to be executed inside a docker. See Dockerfile.
+
+- Do pip uninstall codegeex which comes with the image.
+
+```
+pip uninstall codegeex
+```
+
+- Install codegeex from locaal folder `CodeGeeX-01072025`
+
+```
+cd CodeGeeX-01072025/
+pip install -e .
+```
+
+- Run the eval.
+
 ```
 bash ./scripts_bash_01/run_evals.sh
 ```
 
-- This needs to be executed inside a docker. See Dockerfile.
+##### Appendix.
+
+docker run --gpus all -it --name container_4_code_eval_02 -v $(pwd):/workspace rishubi/codegeex

@@ -122,22 +122,22 @@ def check_correctness(
                     # does not perform destructive actions on their host or network.
                     # Once you have read this disclaimer and taken appropriate precautions,
                     # uncomment the following line and proceed at your own risk:
-                     exec_result = subprocess.run(["go", "test", f"-timeout={timeout}s", "main_test.go"], timeout=timeout, capture_output=True)
+                    exec_result = subprocess.run(["go", "test", f"-timeout={timeout}s", "main_test.go"], timeout=timeout, capture_output=True)
 
-                if exec_result.returncode == 0:
-                    result.append("passed")
-                else:
-                    if exec_result.stderr:
-                        try:
-                            err = exec_result.stderr.decode()
-                        except:
-                            err = exec_result.stderr
+                    if exec_result.returncode == 0:
+                        result.append("passed")
                     else:
-                        try:
-                            err = exec_result.stdout.decode()
-                        except:
-                            err = exec_result.stdout
-                    result.append(f"failed: {err}")
+                        if exec_result.stderr:
+                            try:
+                                err = exec_result.stderr.decode()
+                            except:
+                                err = exec_result.stderr
+                        else:
+                            try:
+                                err = exec_result.stdout.decode()
+                            except:
+                                err = exec_result.stdout
+                        result.append(f"failed: {err}")
 
             except TimeoutException:
                 result.append("timed out")
@@ -167,16 +167,16 @@ def check_correctness(
                     # does not perform destructive actions on their host or network.
                     # Once you have read this disclaimer and taken appropriate precautions,
                     # uncomment the following line and proceed at your own risk:
-                     exec_result = subprocess.run(["node", "test.js"], timeout=timeout, capture_output=True)
+                    exec_result = subprocess.run(["node", "test.js"], timeout=timeout, capture_output=True)
 
-                if exec_result.stderr.decode():
-                    err = exec_result.stderr.decode()
-                    result.append(f"failed: {err}")
-                elif exec_result.stdout.decode():
-                    err = exec_result.stdout.decode()
-                    result.append(f"failed: {err}")
-                else:
-                    result.append("passed")
+                    if exec_result.stderr.decode():
+                        err = exec_result.stderr.decode()
+                        result.append(f"failed: {err}")
+                    elif exec_result.stdout.decode():
+                        err = exec_result.stdout.decode()
+                        result.append(f"failed: {err}")
+                    else:
+                        result.append("passed")
 
             except TimeoutException:
                 result.append("timed out")
@@ -220,22 +220,22 @@ def check_correctness(
                         # does not perform destructive actions on their host or network.
                         # Once you have read this disclaimer and taken appropriate precautions,
                         # uncomment the following line and proceed at your own risk:
-                         exec_result = subprocess.run(["./a.out"], timeout=timeout, capture_output=True)
+                        exec_result = subprocess.run(["./a.out"], timeout=timeout, capture_output=True)
 
-                    if exec_result.returncode == 0:
-                        result.append("passed")
-                    else:
-                        if exec_result.stderr:
-                            try:
-                                err = exec_result.stderr.decode()
-                            except:
-                                err = exec_result.stderr
+                        if exec_result.returncode == 0:
+                            result.append("passed")
                         else:
-                            try:
-                                err = exec_result.stdout.decode()
-                            except:
-                                err = exec_result.stdout
-                        result.append(f"failed: {err}")
+                            if exec_result.stderr:
+                                try:
+                                    err = exec_result.stderr.decode()
+                                except:
+                                    err = exec_result.stderr
+                            else:
+                                try:
+                                    err = exec_result.stdout.decode()
+                                except:
+                                    err = exec_result.stdout
+                            result.append(f"failed: {err}")
                 except TimeoutException:
                     result.append("timed out")
 
@@ -344,7 +344,7 @@ def check_correctness(
                     # does not perform destructive actions on their host or network.
                     # Once you have read this disclaimer and taken appropriate precautions,
                     # uncomment the following line and proceed at your own risk:
-                    # exec_result = subprocess.run([f'java', '-cp', tmp_dir, 'Main'], timeout=timeout, capture_output=True)
+                    exec_result = subprocess.run([f'java', '-cp', tmp_dir, 'Main'], timeout=timeout, capture_output=True)
                     if exec_result.returncode == 0:
                         res = "passed"
                     elif exec_result.returncode == 1:
